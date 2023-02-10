@@ -12,6 +12,7 @@ jobs:
       contents: read
       pull-requests: read
       actions: read
+      security-events: write
     outputs:
       followup: ${{ steps.spelling.outputs.followup }}
     runs-on: ubuntu-latest
@@ -23,11 +24,12 @@ jobs:
     steps:
       - name: check-spelling
         id: spelling
-        uses: check-spelling/check-spelling@v0.0.21
+        uses: check-spelling/check-spelling@prerelease
         with:
           suppress_push_for_open_pull_request: 1
           checkout: true
           post_comment: 0
+          use_sarif: 1
           dictionary_source_prefixes: '{"mondoo": "https://raw.githubusercontent.com/mondoohq/spellcheck-dictionary/main/", "cspell": "https://raw.githubusercontent.com/check-spelling/cspell-dicts/v20220816/dictionaries/"}'
           extra_dictionaries:
             cspell:aws/aws.txt
@@ -36,18 +38,4 @@ jobs:
             cspell:software-terms/src/software-tools.txt
             cspell:companies/src/companies.txt
             mondoo:mondoo_dictionary.txt
-
-  comment:
-    name: Report
-    runs-on: ubuntu-latest
-    needs: spelling
-    permissions:
-      contents: write
-      pull-requests: write
-    if: (success() || failure()) && needs.spelling.outputs.followup
-    steps:
-      - name: comment
-        uses: check-spelling/check-spelling@v0.0.21
-        with:
-          checkout: true
-          task: ${{ needs.spelling.outputs.followup }}
+          debug: 1
