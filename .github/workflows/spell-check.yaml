@@ -1,9 +1,7 @@
 ---
 name: Spell Checking
 
-on:
-  pull_request:
-    types: [opened, reopened, synchronize]
+on: push
 
 jobs:
   spelling:
