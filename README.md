@@ -48,30 +48,3 @@ This command evaluates the security of your local machine:
 ```bash
 cnspec scan local
 ```
-
-### Remote scan targets
-
-You can also specify [remote targets](#supported-targets) to scan. For example:
-
-```bash
-# to scan a docker image:
-cnspec scan docker image ubuntu:22.04
-
-# scan public ECR registry
-aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/r6z5b8t4
-cnspec scan docker image public.ecr.aws/r6z5b8t4
-
-# to scan an AWS account using the local AWS config
-cnspec scan aws
-
-# scan an EC2 instance with EC2 Instance Connect
-cnspec scan aws ec2 instance-connect root@i-1234567890abcdef0
-
-# to scan a Kubernetes cluster via your local kubectl config or a local manifest file
-cnspec scan k8s
-cnspec scan k8s manifest.yaml
-
-# to scan a GitHub repository
-export GITHUB_TOKEN=<personal_access_token>
-cnspec scan github repo <org/repo>
-```
