@@ -1,1 +1,1 @@
-`cnspec` is a cloud-native solution to assess the security and compliance of your business-critical infrastructure. `cnspec` finds vulnerabilities and misconfigurations on all systems in your infrastructure including: public and private cloud environments, Kubernetes clusters, containers, container registries, servers, and endpoints, SaaS products, infrastructure as code, APIs, and more.
+`cnspec` finds vulnerabilities and misconfigurations on all systems in your infrastructure including:
